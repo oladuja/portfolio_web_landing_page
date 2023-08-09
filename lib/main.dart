@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_web_landing_page/home.dart';
@@ -5,13 +6,13 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main()async {
-    WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
+  FirebaseAnalytics.instance.app;
   runApp(const PortfolioWebLandingPage());
-
 }
 
 class PortfolioWebLandingPage extends StatelessWidget {
@@ -29,13 +30,12 @@ class PortfolioWebLandingPage extends StatelessWidget {
         ],
       ),
       theme: ThemeData(
-       textTheme: GoogleFonts.latoTextTheme(
-      Theme.of(context).textTheme,
-    ),
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const Home(),
     );
-    
   }
 }
