@@ -11,16 +11,20 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAnalytics.instance.app;
-  runApp(const PortfolioWebLandingPage());
+  runApp( PortfolioWebLandingPage());
 }
 
 class PortfolioWebLandingPage extends StatelessWidget {
-  const PortfolioWebLandingPage({super.key});
+   PortfolioWebLandingPage({super.key});
+
+  final FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: firebaseAnalytics),
+      ],
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
         breakpoints: [
@@ -35,7 +39,7 @@ class PortfolioWebLandingPage extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home:  Home(),
     );
   }
 }

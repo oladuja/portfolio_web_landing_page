@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
@@ -5,7 +6,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +24,14 @@ class Home extends StatelessWidget {
                 child: Row(
                   children: [
                     const Spacer(),
-                    const SizedBox(width: 5 ),
+                    const SizedBox(width: 5),
                     GestureDetector(
                       onTap: () async {
                         await launchUrl(Uri.parse(
                             'https://github.com/oladuja?tab=repositories'));
+                        analytics.logEvent(name: 'projects', parameters: {
+                          "name": "Github Pages",
+                        });
                       },
                       child: const Text(
                         'Projects',
